@@ -1,4 +1,5 @@
 from stack import Stack
+from queue import ListQueue
 
 graph = {
     "A": ["B", "C"],
@@ -48,3 +49,23 @@ while stack_obj.get_size() > 0:
     if temp_current == current_node:
         current_node = stack_obj.pop()
 
+
+# Breadth first traversal
+# ---------------------------
+
+queue_obj = ListQueue()
+
+current_node = "J"
+
+visited_list = [current_node]
+
+queue_obj.enqueue(current_node)
+
+while queue_obj.get_size() > 0:
+    current_node = queue_obj.dequeue()
+    for neighbour in sorted(graph[current_node]):
+        if neighbour not in visited_list:
+            queue_obj.enqueue(neighbour)
+            visited_list.append(neighbour)
+
+print(visited_list)
